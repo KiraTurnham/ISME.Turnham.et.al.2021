@@ -1,0 +1,151 @@
+```{r}
+
+
+library(stringr)
+library(ggplot2)
+library(adegenet)
+library(reshape2)
+library(reshape)
+
+#V4
+
+as.numeric.factor <- function(x) {as.numeric(levels(x))[x]}
+
+cluster.select <- function(x) {
+	if (sum(x)==0){cl<-0}
+	else {which(x=="1")->cl}
+	cl
+}
+
+STR.in<-("MLG.csv")
+STR.out<-("Results/run_29_f")
+
+Bayes_Allele.Dip<-function(STR.in,STR.out,M){
+	#STR.in is the structure infile, STR.out is the .txt formated result file that comes out of structure, GLX is the Genalex formated genotype file.
+	
+	read.table(STR.in,skip=1)->str
+	readLines(STR.out)->str.out
+	#the next part parses the structure outfile and grabs the q score part and makes a column called species
+	q.tab.id <- grep("Inferred ancestry of individuals:",str.out,
+                    value=FALSE)
+                    str.out[q.tab.id+2:dim(str)[1]]->q.tab
+                    t(sapply(str_extract_all(str.out[q.tab.id+2:(dim(str)[1]+1)],"[0-9.A-Za-z_]+"),as.character))->qs
+                    qs[,c(2,5:dim(qs)[2])]->qs
+                    data.frame(qs)->qs
+	qs->prob.as
+	c("Sample",gsub("X", "Species",names(prob.as))[1:length(names(prob.as))-1])->names(prob.as)
+                    nclust<-dim(qs)[2]-1
+                    for (i in 1:(dim(qs)[2]-1)){
+                    qs[,i+1]<-(M<as.numeric(as.character(qs[,i+1])))*1
+ 					}
+ 					apply( qs[,2:dim(qs)[2]],1,cluster.select)->cluster
+                    #this part reads in the structure infile and then adds the species column in place of the Population
+	read.table(STR.in,fill=TRUE)[1,]->a.names
+ a.names[,1:(length(a.names)-2)]->a.names
+ as.matrix(a.names)->a.names
+colnames(str)<-c("Sample","Population",a.names)
+	str$Cluster<-cluster
+	str$Cluster<-as.character(str$Cluster)
+	str[,c(1,dim(str)[2],2:(dim(str)[2]-1))]->str
+	str[str==-9]<-NA
+	str[str==0]<-NA
+	for (i in 1:length(a.names)){
+	p<-ggplot(str, aes_string(a.names[i],fill= "Cluster")) +stat_bin( binwidth=1, alpha=0.5,position="stack")+xlab(paste(a.names[i]))+ylab("Frequency")
+	ggsave(file= paste(a.names[i],".pdf",sep=""),p)
+		
+	}
+	str[is.na(str)] <- 0
+	write.csv(str, "Partitioned.csv",row.names=F)
+	data.frame(prob.as)->prob.as
+	cbind(prob.as[,2:dim(prob.as)[2]],str)->Cond.tab 
+	
+# for i in 1:nclust)
+	names(Cond.tab)[6:dim(Cond.tab)[2]]->mes
+	names(Cond.tab)[1:5]->id
+	melt.data.frame(Cond.tab,id,mes)->mel
+	names(mel)[7]<-"Score"
+	names(mel)[i]<-"value"
+	mel[,c(2:7,1)]->mel
+	mel[,7]<-as.numeric.factor( mel[,7])
+	dcast(mel,variable~Score,mean)->cond.prob.S1
+	cond.prob.S1[is.na(cond.prob.S1)]<-0
+	
+	
+	names(Cond.tab)[6:dim(Cond.tab)[2]]->mes
+	names(Cond.tab)[1:5]->id
+	melt.data.frame(Cond.tab,id,mes)->mel
+	names(mel)[7]<-"Score"
+	names(mel)[2]<-"value"
+	mel[,c(1,3:7,2)]->mel
+	mel[,7]<-as.numeric.factor( mel[,7])
+	dcast(mel,variable~Score,mean)->cond.prob.S2
+	cond.prob.S2[is.na(cond.prob.S2)]<-0
+	
+	
+	
+	write.csv(cond.prob.S1, "cond.prob.S1.csv")
+	write.csv(cond.prob.S2, "cond.prob.S2.csv")
+}
+
+	Bayes_Allele.Dip<-function(STR.in,STR.out,M){
+#STR.in is the structure infile, STR.out is the .txt formated result file that comes out of structure, GLX is the Genalex formated genotype file.
+		
+		read.table(STR.in,skip=1)->str
+		readLines(STR.out)->str.out
+#the next part parses the structure outfile and grabs the q score part and makes a column called species
+		q.tab.id <- grep("Inferred ancestry of individuals:",str.out,
+						 value=FALSE)
+		str.out[q.tab.id+2:dim(str)[1]]->q.tab
+		t(sapply(str_extract_all(str.out[q.tab.id+2:(dim(str)[1]+1)],"[0-9.A-Za-z_]+"),as.character))->qs
+		qs[,c(2,5:dim(qs)[2])]->qs
+		data.frame(qs)->qs
+		qs->prob.as
+		c("Sample",gsub("X", "Species",names(prob.as))[1:length(names(prob.as))-1])->names(prob.as)
+		nclust<-dim(qs)[2]-1
+		for (i in 1:(dim(qs)[2]-1)){
+			qs[,i+1]<-(M<as.numeric(as.character(qs[,i+1])))*1
+		}
+		apply( qs[,2:dim(qs)[2]],1,cluster.select)->cluster
+#this part reads in the structure infile and then adds the species column in place of the Population
+		read.table(STR.in,fill=TRUE)[1,]->a.names
+		a.names[,1:(length(a.names)-2)]->a.names
+		as.matrix(a.names)->a.names
+		colnames(str)<-c("Sample","Population",a.names)
+		str$Cluster<-cluster
+		str$Cluster<-as.character(str$Cluster)
+		str[,c(1,dim(str)[2],2:(dim(str)[2]-1))]->str
+		str->part
+		str[,c(1:3,seq(4,dim(str)[2],by=2))]->even
+		str[,c(1:3,seq(5,dim(str)[2],by=2))]->odd
+		a.names[1:(dim(even)[2]-3)]->b.names
+		colnames(odd)<-c("Sample","Cluster","Population",b.names)
+		colnames(even)<-c("Sample","Cluster","Population",b.names)
+		rbind(odd,even)->str
+		str[!str$Cluster==0,]->str
+		str[str==-9]<-NA
+		str[str==0]<-NA
+		
+		for (i in 1:length(b.names)){
+			with(str,table(Cluster,get(b.names[i])))/rowSums(with(str,table(Cluster,get(b.names[i]))))->perc
+			data.frame(perc)->perc
+			colnames(perc)<-c("Cluster","Allele","Freq")
+			perc[!perc$Freq==0,]->perc
+			ggplot(perc, aes(x = Allele, y = Cluster)) +
+			geom_point(aes(size = Freq, colour = Cluster, alpha=.02)) +
+			  scale_color_manual(values=c('#009E73','#0072B2', '#CC79A7'))+
+			scale_size_area(max_size=25) +scale_x_discrete(expand=c(.1,1),limit=as.factor(seq(min(as.numeric(levels(perc$Allele))),max(as.numeric(levels(perc$Allele))))),breaks=as.numeric(levels(perc$Allele)))+
+			theme_bw()		
+
+			ggsave(file= paste(b.names[i],"bubble.pdf",sep=""))
+		}
+		
+		str[is.na(str)] <- 0
+		write.csv(part, "Partitioned.csv",row.names=F)
+		
+		
+	}		
+		
+	Bayes_Allele.Dip("MLG.csv", "/Results/run_29_f", 0.5) 
+		
+```
+
