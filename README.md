@@ -1,6 +1,10 @@
-## Turnham et al., 2021
-#R Scripts for allele freqeuncy, STRUCUTRE, and t-SNE plots using PlotSTR, BayesAllele, and t-SNE scripts developed from https://github.com/DrewWham/theclonalescnet (Wham et al., 2016)
-  #PCA_TSNE_and_GMM_script.R
+# Turnham et al., 2021
+Mutualistic microalgae co-diversify with reef corals that acquire symbionts during egg development.
+
+## Supplemental files and R scripts
+
+R Scripts for allele freqeuncy, STRUCUTRE, and t-SNE plots using PlotSTR, BayesAllele, and t-SNE scripts developed from https://github.com/DrewWham/theclonalescnet (Wham et al., 2016)
+  PCA_TSNE_and_GMM_script.R
   #bayesallele_frequency.Rmd
   #structureplot_K2.Rmd
 #Supplemetal tables 1-3
