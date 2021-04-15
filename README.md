@@ -14,6 +14,11 @@ origin, collection site, and approximate latitude/longitude coordinates.
 * * S3. *Cladocopium* microsatellite loci used in this study and corresponding allele size ranges, repeat motifs, annealing temperatures, and references
 * * S4. Cell size differences between *Cladocopium pacificum* and *C.latusorum* from *Pocillopora* host samples obtained in Palau. The mean length and width of ovate cells are listed based off of individual measurements of 55-110 cells per sample
 
+## Supplemental Figures
+* **Supplemental_Figures_S1_S2.pdf** 
+* * S1. Genotype accumulation boxplot showing the percent of unique multilocus genotypes recovered for A) *Cladocopium latusorum* and B) *C. pacificum* based on increasing numbers of loci subsampled from the total dataset of 8 loci. Bars represent 95% confidence intervals.
+* * S2. Multi-locus genotypes analyzed via STRUCTURE plot showing no overlap between *C. latusorum* and *C. pacificum* at K=3 and K=4. Partitioning of each species to these higher K values shows within-species subdivision. Further analyses, beyond the scope of this work, are needed to more accurately assess within-species population genetic structure.
+
 ### Sequence alignments
 * **Supplemental_Dataset_S_concatenated_alignment.nex** *Cladocopium* concatenated nexus alignment: ITS2 LSU cp23S cob cox1
 * **Supplemental_Dataset_psbA_alignment.nex** *Cladocopium* psbA nexus alignment
