@@ -1,20 +1,31 @@
-# Turnham et al., 2021
-Repository of supplemetary materials and scripts for the paper "Mutualistic microalgae co-diversify with reef corals that acquire symbionts during egg development" Kira E. Turnham, Drew C. Wham, Eugenia Sampayo, and Todd C. LaJeunesse. (In review, 2021 ISME-J)
+# ISME.Turnham.et al.2021
+Repository of supplemetal tables, figures, materials, and scripts for the paper "Mutualistic microalgae co-diversify with reef corals that acquire symbionts during egg development" Kira E. Turnham, Drew C. Wham, Eugenia Sampayo, and Todd C. LaJeunesse. (In review, 2021 ISME-J)
 
 doi: TBD
 <br />
-## File overview
+## Files overview
 
-### R Scripts for microsatellite analyses
-For allele freqeuncy, STRUCUTRE, and t-SNE plots using PlotSTR, BayesAllele, and t-SNE scripts developed from https://github.com/DrewWham/theclonalescnet (Wham et al., 2016)
-* **PCA_TSNE_and_GMM_script.R** t-SNE using 
-* **bayesallele_frequency.Rmd** Allele frequency plot based on BayesAllele 
-* **structureplot_K2.Rmd** STRUCTURE plot using PlotSTR
+### Supplemental Tables
+* **Table_S1_samples.pdf** List of *Cladocopium* samples with corresponding species names, ITS2 designations, host *Pocillopora* species, country of
+origin, collection site, and approximate latitude/longitude coordinates.
 
-### Supplemetal tables 1-3
-* **Supplemental_Dataset_S1_concatenated_alignment.nex** S1. *Cladocopium* concatenated nexus alignment: ITS2 LSU cp23S cob cox1
-* **Supplemental_Dataset_S2_microsatellites.docx** S2. *C. pacificum* and *C. latusorum* multi-locus genotypes
-* **Supplemental_Dataset_S3_psbA_alignment.nex** S3. *Cladocopium* psbA nexus alignment
-### Molecular clock data
-* **psba_alignment_mol_clock.nex** *Cladocopium* psbA nexus alignment
-* **mr_model_test_output.txt** Mr Model Test output containing Akaike Information Criterion
+* **Supplemental_Tables_S2-S4.pdf** 
+* S2. PCR primers and associated references for mitochondrial, nuclear, chloroplast genes and non-coding regions
+* S3. *Cladocopium* microsatellite loci used in this study and corresponding allele size ranges, repeat motifs, annealing temperatures, and references
+* S4. Cell size differences between *Cladocopium pacificum* and *C.latusorum* from *Pocillopora* host samples obtained in Palau. The mean length and width of ovate cells are listed based off of individual measurements of 55-110 cells per sample
+
+### Sequence alignments
+* **Supplemental_Dataset_S_concatenated_alignment.nex** *Cladocopium* concatenated nexus alignment: ITS2 LSU cp23S cob cox1
+* **Supplemental_Dataset_psbA_alignment.nex** *Cladocopium* psbA nexus alignment
+* **psba_alignment_mol_clock.nex** *Cladocopium* psbA nexus alignment used in molecular clock analyses (contains *Cladocopium* associated with sibling species *Porites panamensis* from Eastern Pacific and *Porites porites var. colonensi* from Western Atlantic
+
+### MrModelTest output used in downstream Bayesian analyses
+* **mr_model_test_output.txt** MrModelTest output containing Akaike Information Criterion
+
+### Multi-locus genotypes and R scripts for microsatellite analyses
+Allele freqeuncy, STRUCUTRE, and t-SNE plots were created using PlotSTR, BayesAllele, and t-SNE scripts developed by Drew Wham and available at https://github.com/DrewWham/theclonalescnet (see also Wham et al., 2016).
+* **Supplemental_Dataset_microsatellites.docx** *C. pacificum* and *C. latusorum* multi-locus genotypes
+* * **Supplemental_Dataset_linkage.txt** Linkage disequilibrium analysis between pairs of all microsatellite loci used for multi-locus genotyping performed using Genepop on the Web https://genepop.curtin.edu.au/)
+* **PCA_TSNE_and_GMM_script.R** Script for performing principal components analysis (PCA), t-distributed stochastic neighbor embedding (t-SNE), and Gaussian Mixture Model (GMM) clustering analyses
+* **bayesallele_frequency.Rmd** Script for allele frequency based on BayesAllele 
+* **structureplot_K2.Rmd** Script for STRUCTURE using PlotSTR
