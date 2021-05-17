@@ -1,7 +1,9 @@
 # ISME.Turnham.et al.2021
 Repository of supplemetal tables, figures, materials, and scripts for the paper "Mutualistic microalgae co-diversify with reef corals that acquire symbionts during egg development" Kira E. Turnham, Drew C. Wham, Eugenia Sampayo, and Todd C. LaJeunesse. (In review, 2021 ISME-J)
 
-doi: TBD
+Journal: The ISME Journal
+DOI: 10.1038/s41396-021-01007-8
+
 <br />
 ## Files overview
 
